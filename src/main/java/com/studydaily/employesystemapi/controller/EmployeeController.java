@@ -1,12 +1,13 @@
 package com.studydaily.employesystemapi.controller;
 
+import com.studydaily.employesystemapi.model.Employee;
 import com.studydaily.employesystemapi.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("/api/v1")
 public class EmployeeController {
 
     @Autowired
@@ -14,5 +15,10 @@ public class EmployeeController {
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
+    }
+
+    @PostMapping("/employees")
+    public Employee createEmployee(@RequestBody Employee employee) {
+        return employeeService.createEmployee(employee);
     }
 }
